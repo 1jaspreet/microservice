@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            font-size: 10px;
+        } table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+
+    <head>
+
+    <body>
+        <div class="report-body">
+            <div class="info">
+                <div class="row row-cols-1 mt-2 mb-2">
+                    <!-- <div class="col text-left"><strong>Role:</strong>
+                        <%= data.role %>
+                    </div> -->
+                    <div class="col text-center" style="text-align: center;margin: auto;">
+                        <!-- <%if (data.state !=null){ %><strong>State:</strong>
+                            <%= data.state %>
+                                <% } %> -->
+                        <h2 style="text-align: center;margin: auto;">State Report</h2>
+                    </div>
+                    <!-- <div class="col text-center">
+                        <%if (data.district !=null) { %><strong>Disttrict:</strong>
+                            <%= data.district %>
+                                <% } %>
+                    </div> -->
+                </div>
+                <table class="table table-striped" cellpadding="2">
+                    <thead>
+                        <tr class="table-active">
+                            <th width="5%" scope="col">Sr.No.</th>
+                            <th width="30%" scope="col">Title</th>
+                            <% if(data.district_id==0) { %>
+                                <th width="15%" scope="col">District Name</th>
+                                <% } %>
+                                    <th width="10%" scope="col">Type Code</th>
+                                    <th width="10%" scope="col">State ID</th>
+                                    <th width="10%" scope="col">District</th>
+                                    <th width="10%" scope="col">Block</th>
+                                    <th width="10%" scope="col">Udise</th>
+                                    <th width="10%" scope="col">Link of School</th>
+                                    <th width="10%" scope="col">Description</th>
+                                    <th width="10%" scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% (data.list).forEach(function(user,i) { %>
+                            <tr>
+                                <td>
+                                    <%= i+1 %>.
+                                </td>
+                                <td>
+                                    <%= user.title %>
+                                </td>
+                                <!-- <% if(data.district_id==0) { %>
+                                    <td>
+                                        <%=user.district_id %>
+                                    </td>
+                                    <% } %> -->
+                                <td>
+                                    <%= user.type_code %>
+                                </td>
+                                <td>
+                                    <%= user.state_id %>
+                                </td>
+                                <td>
+                                    <%= user.district_id %>
+                                </td>
+                                <td>
+                                    <%= user.block_id %>
+                                </td>
+                                <td>
+                                    <%= user.udise_code %>
+                                </td>
+                                <td>
+                                    <%= user.links_to_school %>
+                                </td>
+                                <td>
+                                    <%= user.description %>
+                                </td>
+                                <td>
+                                    <% if(user.status==1) { %> Active <% } else { %>Inactive <% } %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+
+</html>

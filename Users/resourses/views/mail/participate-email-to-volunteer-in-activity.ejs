@@ -1,0 +1,36 @@
+<table width="100%" align="center" cellspacing="0" cellpadding="" border="0" class="full-width">
+    <tbody>
+        <tr><td height="10">&nbsp;</td></tr>
+        <tr><td><strong>Dear <%= data.volunteer_name %></strong></td></tr>
+        <tr><td height="10">&nbsp;</td></tr>
+        <tr>
+            <td height="20">
+                Thank you for showing interest for participation in <strong><%= data.activity_name %></strong> of <strong><%= data.school_name %></strong>. You will receive update from School shortly.
+            </td>            
+        </tr>
+        <tr>            
+            <td height="20">Alternatively, you can navigate to "Ongoing Activities" under your account name for the latest status of your participation interest.</td>
+        </tr>
+        <tr>
+            <td height="20">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%" align="center" cellspacing="0" cellpadding="7" border="1" class="full-width">
+                    <tbody>
+                        <tr>
+                            <td width="55%"><strong>School Name</strong></td>                    
+                            <td width="20%" align="center"><strong>Mobile</strong></td>
+                        </tr>
+                        
+                        <tr>
+                            <td align="center"><%= data.school_name %></td> 
+                            <td align="center"><%= data.school_mobile %></td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

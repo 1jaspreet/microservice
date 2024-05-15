@@ -1,0 +1,80 @@
+const Message   =   require("../../helpers/Message");
+const Exception =   require('./ExceptionHandler');
+const Model     =   require('../../models');
+const Crypto    =   require('../../libraries/crypto');
+const Library   =   require("../../libraries");
+const User      =   Model.User;
+const fetchApi  =   require('node-fetch');
+
+const getSchoolByUdise = async (req, res) => {
+    try {
+        const request = req.body;
+        const data = await fetchApi(`https://demo.udiseplus.gov.in/api-v1/public/getSchoolMaster/${request.udisecode}`).then(response => response.text())
+        .then(result => {
+            return JSON.parse(result)
+        });
+        return res.status(200).json({status:true,data:data});
+    } catch (e) {
+        return Exception.handle(e,res,req,'');
+    }
+}
+
+exports.validateUdisecode = async (req, res) => {
+    try {
+        const request = req.body;
+        if(request.otc !=null){
+            if(Crypto.decrypt(request.otc) ===  request.çaptcha){
+                const school = await Model.School.findOne({'udise_code':request.udisecode});
+                if(school !=null){
+                    if(school.school_onboard == 1){
+                        return res.status(200).json({status:false,message:Message.AOnboard()}); ;
+                    }else{
+                        if(school.reg_allowed == 1) {
+                            return getSchoolByUdise(req,res); 
+                        }
+                        return res.status(200).json({status:false,message:'School not allowed.'});
+                    }
+                }else{
+                    return res.status(200).json({status:false,message:Message.notFound('Record')});
+                }                
+            }
+            return res.status(200).json({status:false,captcha:true,message:Message.captcha()}); 
+        }else{
+            return getSchoolByUdise(req,res);
+        }
+    } catch (e) {
+        return Exception.handle(e,res,req,'');
+    }
+}
+
+exports.validateMobileUdisecode = async (req, res) => {
+    try {
+        const request = req.body;
+        const data = await fetchApi(`https://demo.udiseplus.gov.in/api-v1/school/checkMobileNumber/${request.udisecode}/${request.mobile}`).then(response => response.text())
+        .then(result => {            
+            return JSON.parse(result)
+        });
+        return res.status(200).json({status:true,data:data});
+    } catch (e) {
+        return Exception.handle(e,res,req,'');
+    }
+}
+
+exports.validateDarpanId = async (req, res) => {
+    try {
+        return res.status(200).json({status:true});
+        const request = req.body;
+        const User = await Model.UserDetail.findOne({'darapan_id':request.darapan_id});
+        if(User != null){
+            return res.status(200).json({status:false,message:'NGO already exists.'});
+        }else{
+            const data = await fetchApi(`http://10.247.222.78/apin/index.php/getngodetails/${request.darapan_id}`).then(response => response.text())
+            .then(result => {            
+                return JSON.parse(result)
+            });
+            return res.status(200).json({status:true,data:data});
+        }        
+    } catch (e) {
+        return Exception.handle(e,res,req,'');
+    }
+}

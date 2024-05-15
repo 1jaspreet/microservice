@@ -1,0 +1,40 @@
+const {body}  =   require('express-validator');
+
+exports.mobileLogin = ()  =>{
+    return [
+        body('mobile')
+            .exists().withMessage('Mobile is required.').trim()
+            .isLength(10).withMessage('Mobile must be 10 digits long.')
+            .matches(/^[0-9\_]+$/).withMessage('Mobile must be numeric only'),
+        body('otp')
+            .exists().withMessage('OTP is required.').trim()
+            .isLength(6).withMessage('OTP must be 6 digits long.')
+    ];
+}
+
+exports.mobileAndUdiseLogin = ()  =>{
+    return [
+        body('udise')
+            .exists().withMessage('UDISE code is required.').trim()
+            .isLength(11).withMessage('UDISE code must be 11 digits long.')
+            .matches(/^[A-Za-z0-9\_]+$/).withMessage('username must be alphanumeric only'),
+        body('mobile')
+            .exists().withMessage('Mobile is required.').trim()
+            .isLength(10).withMessage('Mobile must be 10 digits long.')
+            .matches(/^[0-9\_]+$/).withMessage('Mobile must be numeric only'),
+        body('otp')
+            .exists().withMessage('OTP is required.').trim()
+            .isLength(6).withMessage('OTP must be 6 digits long.'),
+    ];
+}
+
+exports.emailPasswordLogin = ()  =>{
+    return [
+        body('email')
+            .exists().withMessage('Email-ID is required.').trim()
+            .isEmail().normalizeEmail().withMessage('Invalid Email.'),
+        body('password')
+            .exists().withMessage('Password is required.').trim()
+            .isLength({ min: 8 }).withMessage('Password must be at least 8 chars long.'),
+    ];
+}

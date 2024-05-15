@@ -1,0 +1,26 @@
+<table width="100%" align="center" cellspacing="0" cellpadding="0" border="0" class="full-width">
+    <tbody>
+        <tr><td height="10">&nbsp;</td></tr>
+        <tr><td><strong>Dear <%= data.user_name %>,</strong></td></tr>
+        <tr><td height="10">&nbsp;</td></tr>
+        <tr>
+            <td height="20">
+                <!-- Your account has been updated successfully. -->
+                <%= data.msg %>
+            </td>
+        </tr>
+        <tr>
+            <td height="20">&nbsp;</td>
+        </tr>
+        <tr>
+            <td height="20">
+                User Name: <%= data.user_name %> <br/>
+                Email: <%= data.user_email %> <br/>
+                Mobile: <%= data.user_mobile %> <br/>
+                <% if (data.password) { %>
+                    Password: <%= data.password %> <br/>
+                <% } %>
+            </td>            
+        </tr>
+    </tbody>
+</table>

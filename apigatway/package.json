@@ -1,0 +1,16 @@
+{
+  "name": "apigatway",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "fast-gateway": "^3.4.6",
+    "nodemon": "^3.1.0"
+  }
+}

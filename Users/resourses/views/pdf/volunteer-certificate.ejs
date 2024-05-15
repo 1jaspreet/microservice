@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PRABANDH</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <style>
+        @font-face {
+            font-family: FontAwesome;
+            src: url(../fonts/FontAwesome.otf);
+        }
+
+        @font-face {
+            font-family: 'CloisterBlack';
+            src: url('public/assets/fonts/CloisterBlack.ttf');
+
+        }
+
+        @font-face {
+            font-family: 'PoppinsRegular';
+            src: url('public/assets/fonts/PoppinsRegular.woff2') format('woff2'),
+                url('public/assets/fonts/PoppinsRegular.woff') format('woff'),
+                url('public/assets/fonts/PoppinsRegular.ttf') format('truetype'),
+                url('public/assets/fonts/PoppinsRegular.svg#PoppinsRegular') format('svg');
+        }
+
+
+        body {
+
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        .certificate-wrap {
+            width: 1024px;
+            margin: 40px auto 40px;
+        }
+
+        .certificate-inner {
+            border: solid 2px #a6c9d7;
+            width: 100%;
+            min-height: 660px;
+            position: relative;
+        }
+
+        .certificate-inner .left-top-bg {
+            position: absolute;
+            left: -30px;
+            top: -10px;
+        }
+
+        .certificate-inner .left-top-bg img,
+        .certificate-inner .right-bottom-bg img {
+            height: 267px;
+        }
+
+        .certificate-inner .right-bottom-bg {
+            position: absolute;
+            right: -30px;
+            bottom: -25px;
+        }
+
+        .certificate-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 40px 10px 120px;
+            align-items: center;
+            height: 100px;
+        }
+
+        .certificate-header .azadi {
+            height: 65px;
+        }
+
+        .certificate-header .education {
+            height: 45px;
+        }
+
+        .certificate-header .PRABANDH {
+            height: 70px;
+        }
+
+        .certificate-content {
+            padding: 30px 0;
+        }
+
+        .certificate-top-cnt {
+            text-align: center;
+        }
+
+        .certificate-top-cnt img {
+            width: 70%;
+        }
+
+        .note {
+            margin-top: 30px;
+        }
+
+        .name {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .name span {
+            border-bottom: dotted 2px #efefef;
+            padding: 0 50px 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .font-14 {
+            font-size: 14px;
+        }
+
+        .text-blue,
+        .text-blue {
+            color: #2a53a3;
+            font-weight: 600;
+        }
+
+        .border-bottom {
+            border-bottom: dotted 2px #efefef;
+            padding-bottom: 10px;
+        }
+
+        .dates {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 50px;
+        }
+
+        .wishes {
+            padding-right: 50px;
+            text-align: center;
+        }
+
+        .to-row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .line {
+            width: 200px;
+            border-bottom: solid 1px #444;
+        }
+
+        @page :pseudo-selector {
+            size: landscape;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="certificate-wrap">
+        <div class="certificate-inner" style="position: relative;">
+            <div class="left-top-bg">
+                <img src="data:image/png;base64,<%= data.Bleft %>">
+            </div>
+            <div class="certificate-header">
+                <a href="#"><img src="data:image/png;base64,<%= data.ALogo %>" class="azadi"></a>
+                <a href="#"><img src="data:image/png;base64,<%= data.MLogo %>" class="education"></a>
+                <a href="#"><img src="data:image/png;base64,<%= data.VLogo %>" class="PRABANDH"></a>
+                <div style="position: absolute; right: 15px; top: 10px; font-size: 12px;">CRT No. <strong>
+                        <%= data.value.crt_number %>
+                    </strong></div>
+            </div>
+            <div class="certificate-content">
+                <div class="certificate-top-cnt"><img src="data:image/png;base64,<%= data.Crtf %>"></div>
+            </div>
+            <div class="right-bottom-bg">
+                <img src="data:image/png;base64,<%= data.Bright %>">
+            </div>
+            <div class="name"><span>Sh./Smt./Kum. <%= data.value.volunteer_name %></span></div>
+            <p class="center font-14">For successfully volunteering in PRABANDH program</p>
+            <div class="to-row">
+                <span>by contributing</span>&nbsp;
+                <strong>
+                    <%= data.value.contribution_name %>
+                </strong>&nbsp;
+                <span>to</span>&nbsp;
+                <strong>
+                    <%= data.value.school_name %>
+                </strong>&nbsp;
+                <span>school.</span>
+            </div>
+            <p class="center font-14">“We acknowledge your efforts and encourage you to keep participating.”</p>
+            <div class="dates">
+                <div class="date">Date: <strong>
+                        <%= data.value.complete_date %>
+                    </strong></div>
+                <div class="wishes">Best Wishes <br> Ministry of Education</div>
+            </div>
+            <p class="center font-14 text-blue border-bottom">For more information about PRABANDH visit:
+                www.PRABANDH.education.gov.in</p>
+            <p class="center font-14 text-blue">PRABANDH- A School Volunteer Program of DoSEL, MoE. GoI</p>
+        </div>
+    </div>
+</body>
+
+</html>

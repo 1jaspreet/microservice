@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <style>
+            body { font-size: 10px;}
+            table, th, td { border: 1px solid black; border-collapse: collapse;}
+            .header { height: 300px; background-color: aqua; margin-bottom: 20px; }
+            h3 {font-size: 18px;}
+            h4 {font-size: 16px;}
+            h5 {font-size: 14px;}
+            h6 {font-size: 12px;}
+        </style>
+    </head>
+    <body>
+        <div class="report-body">
+            
+            <div class="info">
+                <table class="table table-striped mt-10" >
+                    <!-- <thead style="vertical-align: middle; text-align: center;">
+                        <tr>
+                            <th>Scheme Name</th>
+                        </tr>
+                    </thead> -->
+                    <tbody>
+                        <% 
+                            var FAmountTotal  = 0; 
+                            var FQuantityTotal = 0; 
+                        %>
+                        <% data.schemes.forEach( srow=> { %>
+                            <% 
+                                var SFAmountTotal  = 0; 
+                                var SPQuantityTotal = 0; 
+                            %>
+                            <tr>
+                                <td>
+                                    <h3><%= srow.scheme_name %></h3>
+                                </td>
+                            </tr>                                                              
+                            <% data.majorComponents.forEach( mcrow=> { %>
+                                <% if(mcrow.scheme_id === srow.id){ %>
+                                    <% 
+                                        var MCFAmountTotal  = 0; 
+                                        var MCPQuantityTotal = 0; 
+                                    %>
+                                    <tr>
+                                        <td>
+                                            <h4>--<%= mcrow.major_component_name %></h4>
+                                        </td>
+                                    </tr>                                                                       
+                                    <% data.majorSubComponents.forEach( mscrow=> { %>
+                                        <% if(mscrow.major_component_id === mcrow.id){ %>
+                                            <% 
+                                                var MSCFAmountTotal  = 0; 
+                                                var MSCPQuantityTotal = 0; 
+                                            %>
+                                            <tr>
+                                                <td>
+                                                    <h5>----<%= mscrow.sub_component_name %></h5>
+                                                </td>
+                                            </tr>                    
+                                            <% data.activityMasters.forEach( amrow=> { %>
+                                                <% if(amrow.sub_component_id === mscrow.id){ %>
+                                                    <tr>
+                                                        <td>
+                                                            <h6>------<%= amrow.activity_master_name %></h6>
+                                                            <table class="table table-bordered" cellpadding="2">
+                                                                <tr>
+                                                                    <th width="70%">Activity Detail</th>
+                                                                    <th width="10%">Physical Quantity</th>
+                                                                    <th width="10%">Unit Cost</th>
+                                                                    <th width="10%">Financial Amount</th>
+
+                                                                </tr>
+                                                                <% amrow.activity_detials.forEach( arow=> { %>
+                                                                    <% if(arow.activity_master_details_name !== null){ %>
+                                                                        <tr>
+                                                                            <td width="70%"><%= arow.activity_master_details_name %></td>
+                                                                            <td width="10%" align="right"><%= parseFloat(arow.physical_quantity).toFixed(2) %></td>
+                                                                            <td width="10%" align="right">
+                                                                                <%= !isNaN(parseFloat(arow.unit_cost)) ? parseFloat(arow.unit_cost).toFixed(5) : '' %>
+                                                                              </td>
+                                                                            <td width="10%" align="right"><%= parseFloat(arow.financial_amount).toFixed(5) %></td>
+                                                               
+                                                                        </tr>
+                                                                    <%}else{ %>
+                                                                        <tr>
+                                                                            <td width="70%"><strong>Total</strong></td>
+                                                                            <td width="10%" align="right"><strong><%= parseFloat(arow.physical_quantity).toFixed(2) %></strong></td>
+                                                                            <td width="10%" align="right">
+                                                                                <%= !isNaN(parseFloat(arow.unit_cost)) ? parseFloat(arow.unit_cost).toFixed(5) : '' %>
+                                                                              </td>      
+                                                                            <td width="10%" align="right"><strong><%= parseFloat(arow.financial_amount).toFixed(5) %></strong></td>
+                                                                  
+                                                                        </tr>
+                                                                        <% 
+                                                                        MSCPQuantityTotal = +MSCPQuantityTotal + (+arow.physical_quantity); 
+                                                                        MSCFAmountTotal   = +MSCFAmountTotal + (+arow.financial_amount); 
+                                                                        %>
+                                                                    <%} %>
+                                                                <% }); %>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                <% }; %>
+                                            <% }); %>
+                                            <tr>
+                                                <td>
+                                                    <div style="display: flex; justify-content: space-between;">
+                                                        <div style="width: 70%; float: left;"><h5 class="text-danger">Total (for <%= mscrow.sub_component_name %>)</h5></div>
+                                                        <div style="width: 10%; float: right;"><h5 class="text-danger ms-5 float-end"><%= MSCPQuantityTotal %></h5></div>
+                                                        <div style="width: 10%; float: right;"><h5 class="text-danger ms-5 float-end"></h5></div>
+                                                        <div style="width: 10%; float: right;"><h5 class="text-danger ms-5 float-end"><%= MSCFAmountTotal %></h5></div>
+
+                                                    </div>
+                                                </td>
+                                                <% 
+                                                MCPQuantityTotal = +MCPQuantityTotal + (+MSCPQuantityTotal); 
+                                                MCFAmountTotal   = +MCFAmountTotal + (+MSCFAmountTotal); 
+
+                                                %>
+                                            </tr>
+                                        <% }; %>
+                                    <% }); %>
+
+                                    <tr>
+                                        <td>
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <div style="width: 70%; float: left;"><h5 class="text-success">Total (for <%= mcrow.major_component_name %>)</h5></div>
+                                                <div style="width: 10%; float: right;"><h5 class="text-success ms-5 float-end"><%= parseFloat(MCPQuantityTotal).toFixed(2) %></h5></div>
+                                                <div style="width: 10%; float: right;"><h5 class="text-success ms-5 float-end"></h5></div>
+                                                <div style="width: 10%; float: right;"><h5 class="text-success ms-5 float-end"><%= parseFloat(MCFAmountTotal).toFixed(5) %></h5></div>
+
+                                            </div>
+                                        </td>
+                                        <% 
+                                        SPQuantityTotal = +SPQuantityTotal + (+MCPQuantityTotal);
+                                        SFAmountTotal   = +SFAmountTotal + (+MCFAmountTotal); 
+ 
+                                        %>
+                                    </tr>
+
+                                <% }; %>
+                            <% }); %>
+
+                            <tr>
+                                <td>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <div style="width: 70%; float: left;"><h5 class="text-primary">Total (for <%= srow.scheme_name %>)</h5></div>
+                                        <div style="width: 10%; float: right;"><h5 class="text-primary ms-5 float-end"><%= parseFloat(SPQuantityTotal).toFixed(2) %></h5></div>
+                                        <div style="width: 10%; float: right;"><h5 class="text-primary ms-5 float-end"></h5></div>
+                                        <div style="width: 10%; float: right;"><h5 class="text-primary ms-5 float-end"><%= parseFloat(SFAmountTotal).toFixed(5) %></h5></div>
+
+                                    </div>
+                                </td>
+                                <% 
+                                FQuantityTotal = +FQuantityTotal + (+SPQuantityTotal); 
+                                FAmountTotal   = +FAmountTotal + (+SFAmountTotal); 
+
+                                %>
+                            </tr>
+                            
+                        <% }); %>
+                        <tr>
+                            <td>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div style="width: 70%; float: left;"><h5 class="text-dark">Total</h5></div>
+                                    <div style="width: 10%; float: right;"><h5 class="text-dark ms-5 float-end"><%= parseFloat(FQuantityTotal).toFixed(2) %></h5></div>
+                                    <div style="width: 10%; float: right;"><h5 class="text-dark ms-5 float-end"></h5></div>
+                                    <div style="width: 10%; float: right;"><h5 class="text-dark ms-5 float-end"><%= parseFloat(FAmountTotal).toFixed(5) %></h5></div>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

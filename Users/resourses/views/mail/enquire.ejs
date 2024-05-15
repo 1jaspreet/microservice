@@ -1,0 +1,35 @@
+<table width="100%" align="center" cellspacing="0" cellpadding="" border="0" class="full-width">
+    <tbody>
+        <tr><td height="10">&nbsp;</td></tr>
+        <tr><td><strong>Dear <%= data.name %></strong></td></tr>
+        <tr><td height="10">&nbsp;</td></tr>
+        <tr>
+            <td height="20">
+                Thank you for enquire.
+            </td>            
+        </tr>       
+        <tr>
+            <td height="20">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%" align="center" cellspacing="0" cellpadding="7" border="1" class="full-width">
+                    <tbody>
+                        <tr>
+                            <td align="center" width="20%"><strong>Name</strong></td>                    
+                            <td width="20%" align="center"><strong>Email</strong></td> 
+                            <td width="25%"align="center"><strong>Message</strong></td>
+                        </tr>
+                        
+                        <tr>
+                            <td align="center"> <%= data.name %></td> 
+                            <td align="center"> <%= data.email %></td> 
+                            <td align="center"> <%= data.message %></td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
