@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            font-size: 10px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            background-color: red;
+        }
+
+        .header {
+            height: 300px;
+            background-color: aqua;
+            margin-bottom: 20px;
+        }
+
+        .custom-table td:nth-child(1),
+        .custom-table th:nth-child(1) {
+            background-color: green;
+            /* Set your desired background color */
+        }
+
+        .custom-table td:nth-child(3),
+        .custom-table th:nth-child(3) {
+            background-color: green;
+            /* Set your desired background color */
+        }
+    </style>
+
+    <head>
+
+    <body>
+        <div class="report-body">
+            <div class="info">
+                <!-- <% if (data.header.district_name !==null ) { %>
+                    <table class="table table-bordered custom-table" style="border: 1px solid black;border-collapse: collapse;padding: 5px;
+                    font-size: 8px;width:100%;margin:auto;">
+                        <tbody>
+                            <tr style="font-size:10px">
+                                <td>
+                                    State Name
+                                </td>
+                                <td colspan="2">
+                                    <%= data?.header?.state_name %>
+                                </td>
+                                <td>
+                                    District Name</td>
+                                <td colspan="2">
+                                    <%= data?.header?.district_name %>
+                                </td>
+                            </tr>
+                            <% (data.domy).forEach(function(v,u) { %>
+                                <tr>
+                                    <td style="border: 1px solid black;border-collapse: collapse;padding: 5px;
+                                                font-size: 8px;font-weight:bold;">
+                                        <%= v.label %>
+                                    </td>
+                                    <td style="border: 1px solid black;border-collapse: collapse;padding: 5px;
+                                                font-size: 8px;">
+                                        <%= v.value %>
+                                    </td>
+                                    <td style="border: 1px solid black;border-collapse: collapse;padding: 5px;
+                                                 font-size: 8px;">Email</td>
+                                    <td style="border: 1px solid black;border-collapse: collapse;padding: 5px;
+                                                font-size: 8px;">
+                                        <%= v.email %>
+                                    </td>
+                                    <td style="border: 1px solid black;border-collapse: collapse;padding: 5px;
+                                                font-size: 8px;">Mobile</td>
+                                    <td style="border: 1px solid black;border-collapse: collapse;padding: 5px;
+                                                 font-size: 8px;text-align:right">
+                                        <%= v.value %>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+
+                    </table>
+                    <br />
+                    <% } %> -->
+                <table class="table table-striped mt-10" cellpadding="2">
+                    <thead>
+                        <tr class="table-active">
+                            <th width="5%" scope="col">Sr.No.</th>
+                            <!-- <% if(data.district_id==0) { %> -->
+                            <!-- <th width="15%" scope="col">Major Component</th> -->
+                            <!-- <% } %> -->
+                            <th width="20%" scope="col">Scheme </th>
+                            <th width="50%" scope="col">Major Component</th>
+                            <th width="15%" scope="col">Financial (Recurring)</th>
+                            <th width="15%" scope="col">Financial (Non Recurring)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% (data.list).forEach(function(user,u) { %>
+                            <tr>
+                                <td>
+                                    <%= u+1 %>.
+                                </td>
+                                <td>
+                                    <%= user.scheme_name %>
+                                </td>
+                                <td>
+                                    <%= user.major_component_name %>
+                                </td>
+                                <td style="text-align: right;">
+                                    <%= user.financial_amount_recuring===null?"0":user.financial_amount_recuring %>
+                                </td>
+                                
+                                <td style="text-align: right;">
+                                    <%= user.financial_amount_nonrecuring===null?"0":user.financial_amount_nonrecuring %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+
+</html>

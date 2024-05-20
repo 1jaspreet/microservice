@@ -1,0 +1,12 @@
+const Model = require("../../models").ReportModel;
+const Exception = require("../Assets/ExceptionHandler");
+
+exports.list = async (req, res) => {
+  try {
+    const request = req.body;
+    const object = await Model.listReports({user_role_id: request.user_role_id})
+    res.status(200).json({ status: true, data: object });
+  } catch (e) {
+    return Exception.handle(e,res,req,'');
+  }
+};

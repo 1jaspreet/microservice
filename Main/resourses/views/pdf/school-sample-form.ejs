@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <style>body{font-size: 10px;}</style>
+    <head>
+    <body>
+        <div class="report-body">
+            <div class="info">
+                <div class="fs-2 text-center">Application Sample Form of School</div>
+                <% var school = data.list[0]; %>
+                <table class="table table-striped table-bordered " cellpadding="2">
+                    <thead>
+                        <tr class="table-active">
+                            <th colspan="4">School Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-active">
+                            <th colspan="3">School Name</th><th>School Management</th>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><%= school.school_name %></td><td><%= getManagementCenter(school.sch_mgmt_center_id) %></td>
+                        </tr>
+                        <tr class="table-active">
+                            <th>Udise Code</th><th>State</th>
+                            <th>District/Region</th><th>Revenue/CD Block</th>
+                        </tr>
+                        <tr>
+                            <td><%= school.udise_code %></td><td><%= school.state_name %></td>
+                            <td><%= school.district_name %></td><td><%= school.block_name %></td>
+                        </tr>
+                        <tr class="table-active">
+                            <th>School Type </th><th>Location Type</th>
+                            <th>Application Status</th><th>School Medium</th>
+                        </tr>
+                        <tr>
+                            <td><%= getSchoolType(school.sch_type) %></td>
+                            <td><% if(school.location_type == 1) { %> Rural <% } else { %>Urban <% } %></td>
+                            <td><% if(school.final_flag == 1) { %> Completed <% } else { %>Not Completed <% } %></td>
+                            </td><td><%= school.sch_medium %></td>
+                        </tr>
+                        <tr class="table-active">
+                            <th>Drinking Water</th><th>Pucca Building</th>
+                            <th>Electricity</th><th>Toilets</th>
+                        </tr>
+                        <tr>
+                            <td><% if(school.drink_water >= 1) { %> Yes <% } else { %>No <% } %></td>
+                            <td><% if(school.pucca_building >= 1) { %> Yes <% } else { %>No <% } %></td>
+                            <td><% if(school.electricity >= 1) { %> Yes <% } else { %>No <% } %></td>
+                            <td><% if(school.toilet_functional >= 1) { %> Yes <% } else { %>No <% } %></td>
+                        </tr>
+                        <tr class="table-active">
+                            <th>Classes</th><th>Total Teacher </th>
+                            <th>Total Enrollments</th><th>School Category</th>
+                        </tr>
+                        <tr>
+                            <td><%= school.class_frm %>-<%= school.class_to %></td><td><%= school.tot_tch_all %></td>
+                            <td><%= school.total_enrolment %></td><td><%= school.category_name %></td>
+                        </tr>
+                        <tr class="table-active">
+                            <th>Email</th><th>Mobile</th>
+                            <th>Head of School</th><th>School's Head Degisnation</th>
+                        </tr>
+                        <tr>
+                            <td><%= school.email %></td><td><%= school.mobile %></td>
+                            <td><%= school.school_head %></td><td><%= school.head_designation %></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <% (data.schemes).forEach(function(scheme,i) { %>    
+                    <table class="table table-bordered mb-3 mt-3 align-middle" cellpadding="2">
+                        <thead>
+                            <tr class="table-active">
+                                <th colspan="4"><%= scheme.name %><br/><%= scheme.hindi_name %></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-active">
+                                <th width="5%">Sr.No</th>
+                                <th width="80%">Questions</th>
+                                <th width="10%">Options</th>
+                                <th width="5%">Marks</th>
+                            </tr>
+                            <% var j = 1; %>
+                            <% (data.questions).forEach(function(question) { %> 
+                                <% if(scheme.id == question.schemes_id && question.marks > 0) { %> 
+                                    <tr>
+                                        <td><%= j++ %>.</td>
+                                        <td><%= question.name %><br/><%= question.hindi_question %></td>
+                                        <td><input type="radio"> Yes <input type="radio"> No</td>
+                                        <td><%= question.marks %></td>
+                                    </tr>
+                                <% }%>
+                            <% })%>
+                        </tbody>
+                    </table>
+                <% })%>
+                
+                <div class="card border-secondary mt-3">
+                    <div class="card-header">Files</div>
+                    <div class="card-body">
+                        <div class="row row-cols-4">
+                            <div class="col-md-3">                                
+                                <div class="card">
+                                    <div class="card-header">Front Image</div>
+                                    <img src="https://pusat.edu.np/wp-content/uploads/2022/09/default-image.jpg" style="width: 100%;height:200px;"class="card-img-top" alt="...">
+                                </div>
+                            </div>
+                            <div class="col-md-3">                                
+                                <div class="card">
+                                    <div class="card-header">Front Image</div>
+                                    <img src="https://pusat.edu.np/wp-content/uploads/2022/09/default-image.jpg" style="width: 100%;height:200px;" class="card-img-top" alt="...">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-header">Principal Letter</div>
+                                    <img  style="width: 100%;height:200px;" src="https://play-lh.googleusercontent.com/e55DvXjInKqidphgSLajmUe7Q4daDDTs0EV_z83-mXpP1OEfPUDJgerz1Uu9z1UQr0A=w240-h480-rw" class="card-img-top" alt="...">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-header">Principal Letter</div>
+                                    <img style="width: 100%;height:200px;" src="https://play-lh.googleusercontent.com/e55DvXjInKqidphgSLajmUe7Q4daDDTs0EV_z83-mXpP1OEfPUDJgerz1Uu9z1UQr0A=w240-h480-rw" class="card-img-top" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-secondary mt-3">
+                    <div class="card-header bg-primary">School Decleration</div>
+                    <div class="card-body">
+                        <div class="row row-cols-1">
+                            <div class="col-md-12 text-break text-wrap">                                
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,58 @@
+@font-face {
+	font-family: FontAwesome;
+	src: url(../fonts/FontAwesome.otf);
+}
+/*====Reset css=========*/
+
+@font-face {
+    font-family: 'CloisterBlack';
+    src: url('fonts/CloisterBlack.ttf');
+  
+}
+
+@font-face {
+    font-family: 'PoppinsRegular';
+    src: url('fonts/PoppinsRegular.eot');
+    src: url('fonts/PoppinsRegular.eot') format('embedded-opentype'),
+         url('fonts/PoppinsRegular.woff2') format('woff2'),
+         url('fonts/PoppinsRegular.woff') format('woff'),
+         url('fonts/PoppinsRegular.ttf') format('truetype'),
+         url('fonts/PoppinsRegular.svg#PoppinsRegular') format('svg');
+}
+
+
+body {
+	font-family: 'PoppinsRegular';
+    padding: 0;
+    margin: 0;
+}
+strong{font-weight:700;}
+.certificate-wrap {width: 1024px; margin:40px auto 40px;}
+.certificate-inner{border: solid 2px #a6c9d7; width: 100%; min-height: 660px; position: relative;}
+.certificate-inner .left-top-bg {position: absolute; left:-30px; top: -10px;}
+.certificate-inner .left-top-bg img, .certificate-inner .right-bottom-bg img{height: 267px;}
+.certificate-inner .right-bottom-bg {position: absolute; right:-30px; bottom: -25px;}
+.certificate-header {display: flex; justify-content: space-between; padding: 10px 40px 10px 120px; align-items: center; height: 100px;}
+.certificate-header .azadi{height:65px;}
+.certificate-header .education{height: 45px;}
+.certificate-header .vidyanjali{height: 70px;}
+.certificate-content {padding: 30px 0;}
+.certificate-top-cnt {text-align: center;}
+.certificate-top-cnt img {width: 70%;}
+
+.note{margin-top:30px;}
+.name{text-align:center; display:flex;    justify-content: center; }
+.name span{border-bottom:dotted 2px #efefef; padding:0 50px 10px; font-size:24px; font-weight:bold; }
+.center{text-align:center;}
+.font-14{ font-size:14px; }
+.text-blue,.text-blue{color:#2a53a3; font-weight: 600;}
+.border-bottom{border-bottom:dotted 2px #efefef; padding-bottom:10px;}
+.dates {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+.wishes{padding-right: 50px;}
+.to-row{    display: flex;
+    justify-content: center;}
+	.line{width:200px; border-bottom:solid 1px #444;}

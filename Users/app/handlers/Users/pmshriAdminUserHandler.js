@@ -4,7 +4,6 @@ const Hash = require("../../libraries").Hash;
 const Exception = require("../Assets/ExceptionHandler");
 const Helper = require("../../helpers/Helper");
 const ConsultantModel = require("../../models/ConsultantMapping/ConsultantMappingModel");
-const Models = require("../../models").Prabandh;
 const ApiLog = require("../Logs/ApiLogHandler");
 const MailerHandler = require("../../mails");
 const ModelConsult = require("../../models").ConsultantMapping;
@@ -297,51 +296,51 @@ exports.updateStatus = async (req, res) => {
   }
 };
 
-exports.userPer = async (req, res) => {
-  const token = req.headers.authorization.split(" ")[1];
-  try {
-    const { user_id } = req.body;
-    let responseFromApiLogger;
-    const result = await Models.knx().raw(`select * from (
-                    SELECT 
-                (json_array_elements(major_component_ids)->>'id')::int AS activity_id,
-                json_array_elements(major_component_ids)->>'label' AS activity_name,
-                id
-                FROM 
-                public.consultant_mapping cm where user_id = ${user_id}
-                ) aa , 
+// exports.userPer = async (req, res) => {
+//   const token = req.headers.authorization.split(" ")[1];
+//   try {
+//     const { user_id } = req.body;
+//     let responseFromApiLogger;
+//     const result = await Models.knx().raw(`select * from (
+//                     SELECT 
+//                 (json_array_elements(major_component_ids)->>'id')::int AS activity_id,
+//                 json_array_elements(major_component_ids)->>'label' AS activity_name,
+//                 id
+//                 FROM 
+//                 public.consultant_mapping cm where user_id = ${user_id}
+//                 ) aa , 
                 
-                ( SELECT 
-                (json_array_elements(state_ids)->>'id')::int AS state_id,
-                json_array_elements(state_ids)->>'name' AS state_name,
-                id as idk 
-            FROM 
-                public.consultant_mapping cm where user_id = ${user_id}
-                ) bb ,
-                ( 
-                SELECT 
-                (json_array_elements(component)->>'id')::int AS scheme_id,
-                json_array_elements(component)->>'scheme_name' AS scheme_name,
-                id as idn 
-            FROM 
-                public.consultant_mapping cm where user_id = ${user_id}
-                ) cc 
-                    where aa.id = bb.idk
-                    and cc.idn = aa.id`);
-    if (result != null) {
-      responseFromApiLogger = await ApiLog.create(
-        token,
-        req.originalUrl,
-        "userPer",
-        req.body,
-        { status: true, data: result.rows }
-      );
-      res.status(200).json({ status: true, data: result.rows });
-    }
-  } catch (e) {
-    return Exception.handle(e, res, req, "userPer");
-  }
-};
+//                 ( SELECT 
+//                 (json_array_elements(state_ids)->>'id')::int AS state_id,
+//                 json_array_elements(state_ids)->>'name' AS state_name,
+//                 id as idk 
+//             FROM 
+//                 public.consultant_mapping cm where user_id = ${user_id}
+//                 ) bb ,
+//                 ( 
+//                 SELECT 
+//                 (json_array_elements(component)->>'id')::int AS scheme_id,
+//                 json_array_elements(component)->>'scheme_name' AS scheme_name,
+//                 id as idn 
+//             FROM 
+//                 public.consultant_mapping cm where user_id = ${user_id}
+//                 ) cc 
+//                     where aa.id = bb.idk
+//                     and cc.idn = aa.id`);
+//     if (result != null) {
+//       responseFromApiLogger = await ApiLog.create(
+//         token,
+//         req.originalUrl,
+//         "userPer",
+//         req.body,
+//         { status: true, data: result.rows }
+//       );
+//       res.status(200).json({ status: true, data: result.rows });
+//     }
+//   } catch (e) {
+//     return Exception.handle(e, res, req, "userPer");
+//   }
+// };
 
 exports.profileUpdate = async (req, res) => {
   const token = req.headers.authorization.split(" ")[1];

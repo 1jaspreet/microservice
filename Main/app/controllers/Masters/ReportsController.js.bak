@@ -1,0 +1,9 @@
+const express   =   require('express');
+const routers   =   express.Router();
+const Handler   =   require('../../handlers').ReportsMasterHandler;
+
+routers.post('/list',(req, res)=>{
+    return Handler.list(req, res);
+});
+
+module.exports = routers;

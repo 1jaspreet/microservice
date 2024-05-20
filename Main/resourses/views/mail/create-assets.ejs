@@ -1,0 +1,34 @@
+<table width="100%" align="center" cellspacing="0" cellpadding="0" border="0" class="full-width">
+    <tbody>
+        <tr><td height="10">&nbsp;</td></tr>
+        <tr><td><strong>Dear <%= data.name %></strong></td></tr>
+        <tr><td height="10">&nbsp;</td></tr>
+        <tr>
+            <td height="20">
+                School <%= data.school_name %> has initiated new <%= data.asset_name %>
+                contribution request on PRABANDH. Please find the associated details are below:
+            </td>
+        </tr>
+        <tr>
+            <td height="20">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%" align="center" cellspacing="0" cellpadding="7" border="1" class="full-width">
+                    <tbody>
+                        <tr>
+                            <td width="55%"><strong>Asset Name</strong></td>                    
+                            <td width="20%" align="center"><strong>Expected Date before which Contribution Required</strong></td>                    
+                            <td width="25%"align="center"><strong>Last date of receiving application</strong></td>
+                        </tr>
+                        <tr>
+                            <td><%= data.asset_name %></td> 
+                            <td align="center"><%= data.expected_date %></td> 
+                            <td align="center"><%= data.last_application_date %></td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

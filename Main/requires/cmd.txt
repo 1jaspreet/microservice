@@ -1,0 +1,110 @@
+______________________________________________________________LINUX_______________________________________________________________________________
+To take backup: 
+pg_dump -h localhost -U postgres --column-inserts exemplarschool > July05DB.sql
+
+To restore backup: 
+psql -h localhost -U postgres -d sebd < sebdMay30.sql
+
+To import single table:
+pg_dump --host localhost --port 5432 --username postgres --format plain --verbose --file table_name.sql --table public.table_name sebd
+
+To restore single table: 
+psql -h hostname -U username -d dbname -1 -f filename.sql
+psql -h hostname -U postgres -d dbname < filename.sql
+
+To restore single table from csv: 
+psql -h localhost -U postgres -d pmshrischool -c "\copy districts from mst_district_live.csv delimiter ',' csv header;"
+
+
+___________________________________________________________WINDOWS________________________________________________________________________________
+
+To take backup:
+./pg_dump.exe -h localhost -U postgres -d vidyanjali_rn > /e/xampp/htdocs/nicsi/databases/July06DB.sql
+
+To restore backup: 
+Step 1: /e/xampp/PostgreSQL/13/bin
+
+Step 2: ./psql.exe -h localhost -U postgres -d vidyanjali_rn -f /e/xampp/htdocs/nicsi/databases/July05DB.sql(Linux)
+
+For window: psql.exe -h localhost -U postgres -d vidyanjali_rn -f /e/xampp/htdocs/nicsi/databases/July05DB.sql
+
+./psql.exe -h localhost -U postgres -d vidyanjali_rn -f /c/Users/NICSI/Downloads/Audit/08092022/master_school.sql
+
+To take backup from server:
+./pg_dump.exe -h 10.25.121.78 -U postgres -d xemplar > /e/xampp/htdocs/nicsi/databases/July23DB.sql
+./pg_dump.exe -h 10.194.75.164 -U pms -d vidyanjali > /e/xampp/htdocs/nicsi/databases/LPMS13OCT.sql Pmshri@DB2022#321
+./pg_dump.exe -h 10.247.141.225 -U pms -d vidyanjali > /e/xampp/htdocs/nicsi/databases/LPMS13OCT.sql Pmshri@DB2022#321
+
+
+To restore on server:
+./psql.exe -h 10.25.121.78 -U postgres -d xemplar -f /e/xampp/htdocs/nicsi/databases/July23DB.sql
+./psql.exe -h 10.247.141.225 -U pms -d vidyanjali -f /e/xampp/htdocs/nicsi/databases/ Pmshri@DB2022#321
+
+To import single table:
+./pg_dump.exe --host localhost --port 5432 --username postgres --format plain --verbose --file /e/xampp/htdocs/nicsi/databases/master_blocks.sql --table public.master_blocks pmshri_old
+./pg_dump.exe --host localhost --port 5432 --username postgres --format plain --verbose --file /e/xampp/htdocs/nicsi/databases/vidyanjali/master_activity_sub_categories.sql --table public.master_activity_sub_categories vidyanjali_rn5
+
+To restore single table:
+./psql.exe -h localhost -U postgres -d vidyanjali -f /e/xampp/htdocs/nicsi/databases/master_blocks.sql
+./psql.exe -h 10.247.141.225 -U pms -d vidyanjali -f /e/xampp/htdocs/nicsi/databases/master_blocks.sql
+
+------------------------------------------vinod-----------------------------------
+
+C:\Users>cd ..
+
+C:\>cd "Program Files"
+
+C:\Program Files>cd PostgreSQL
+
+C:\Program Files\PostgreSQL>cd 11
+
+C:\Program Files\PostgreSQL\11>cd bin
+
+C:\Program Files\PostgreSQL\11\bin>pg_dump.exe -h 10.25.26.30 -U postgres -d exemplarschool > /d/July22DB.sql
+The system cannot find the path specified.
+
+C:\Program Files\PostgreSQL\11\bin>pg_dump.exe -h 10.25.26.30 -U postgres -d exemplarschool > D:\July22DB.sql
+pg_dump: [archiver (db)] connection to database "exemplarschool" failed: FATAL:  database "exemplarschool" does not exist
+
+C:\Program Files\PostgreSQL\11\bin>pg_dump.exe -h 10.25.26.30 -U postgres -d exemplarschool > D:\Sep06DB.sql
+
+C:\Program Files\PostgreSQL\11\bin>pg_dump.exe -h 10.25.121.78 -U postgres -d xemplar > D:\Sep24DB.sql
+
+For restoring csv files:
+
+E:\xampp\PostgreSQL\13\bin>psql -h 10.25.121.78 -d xemplar -U postgres
+\COPY districts(id,state_id,name,district_code,state_code,lgd_district_id,lgd_state_id,is_active,inityear,created_by,updated_by,created_at,updated_at) 
+FROM 'C:\Users\NICSI\Downloads\July27\mst_district_live.csv' DELIMITER ',' CSV HEADER;
+
+vinod laptop
+E:\projects\wamp\PostgreSQL\13\bin>pg_dump.exe -h localhost -U postgres -d exemplarschool > E:\Sep02DB.sql
+
+./psql.exe -h localhost -U postgres -d exemplarschool -f E:\Sep02DB.sql
+------------------------------------------------------------------------------------------------------------------
+php artisan migrate --path=database/migrations/2021_07_30_092649_create_jobs_table.php
+php artisan migrate --path=database/migrations/2021_07_30_092649_create_jobs_table.php
+
+----------------------------------------------------------------
+
+E:\xampp\PostgreSQL\13\bin>pg_dump.exe -h localhost -U postgres -d exemplarschool > E:\Sep22DB.sql
+
+---------------------------------------------------------------------
+backup vd4
+C:\xampp\PostgreSQL\12\bin>pg_dump.exe -h localhost -U postgres -d vd4 > E:\dec2021.sql
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+224 - redhat@123 
+225 - redhat@123 
+225 - /usr/local/pgsql/bin/psql -d vidyanjali -U pms -h 127.0.0.1 < PM31AUG.sql
+
+find /home/vidyanjali -type d -exec chmod 555 {} \;
+find /home/vidyanjali -type f -exec chmod 444 {} \;
+
+163 - redhat@123
+164 - redhat@123
+164 - /usr/local/pgsql/bin/psql -d vidyanjali -U pms -h 127.0.0.1 < PM31AUG.sql
+
+find /var/www/html -type d -exec chmod 555 {} \;
+find /var/www/html -type f -exec chmod 444 {} \;
